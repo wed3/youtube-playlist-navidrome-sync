@@ -36,7 +36,7 @@ rsync
 util-linux
 ```
 
-On Arch/CachyOS:
+On Arch:
 
 ```bash
 sudo pacman -S yt-dlp ffmpeg openssh rsync util-linux

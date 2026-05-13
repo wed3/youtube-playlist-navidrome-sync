@@ -6,11 +6,11 @@ It uses `yt-dlp` to download/extract audio, embeds metadata and thumbnails, uses
 
 ## Disclaimer
 
-This project was largely vibecoded and built around a personal Navidrome workflow. Treat it as a practical automation script, not polished production software.
+This project was largely vibecoded and built around a personal Navidrome workflow.
 
-Review the code before running it, especially the browser-cookie handling, SSH/rsync target, deletion behavior, and `yt-dlp` options.
+Review the code before running it, especially the cookie handling, SSH/rsync target, deletion behavior, and `yt-dlp` options.
 
-Only use this with media you have the right to download, store, or transfer. YouTube and other platforms may restrict automated downloading in their terms.
+Only use this with media you have the right to download. YouTube and other platforms may restrict automated downloading.
 
 ## Features
 
@@ -20,7 +20,7 @@ Only use this with media you have the right to download, store, or transfer. You
 - Uses `yt-dlp` archive tracking to avoid duplicate downloads
 - Transfers each finished file to a remote Navidrome music directory with `rsync`
 - Deletes local staged files after successful transfer
-- Supports Firefox/LibreWolf cookies for logged-in playlists
+- Supports various browser cookies for private playlists
 - Uses `flock` to prevent overlapping runs
 - Supports dry runs and keep-local debugging mode
 

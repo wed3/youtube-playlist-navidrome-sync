@@ -112,28 +112,6 @@ Disable browser cookies:
 ./youtube_sync.sh --no-cookies
 ```
 
-## Browser Cookies
-
-The script can use Firefox/LibreWolf cookies through `yt-dlp`.
-
-By default, it checks common locations:
-
-- Flatpak LibreWolf
-- Native LibreWolf
-- Firefox
-
-If automatic detection fails, set a cookie path manually in `youtube_sync.conf`:
-
-```bash
-COOKIE_SQLITE="$HOME/.mozilla/firefox/xxxxxxxx.default-release/cookies.sqlite"
-```
-
-Or disable cookies for public playlists:
-
-```bash
-USE_BROWSER_COOKIES=0
-```
-
 ## SSH
 
 Make sure key-based SSH works before running the script:
@@ -165,18 +143,15 @@ Check logs:
 journalctl --user -u youtube-sync.service -f
 ```
 
-## License
+## Browser Cookies
 
-MIT
-
-
-## Chromium / Chrome / Brave Cookies
-
-The script can also use Chromium-family browser cookies through `yt-dlp`.
+The script can use browser cookies through `yt-dlp` for playlists that require login or age/account verification.
 
 Supported browser values:
 
 ```text
+firefox
+librewolf
 chromium
 chrome
 brave
@@ -186,21 +161,23 @@ vivaldi
 whale
 ```
 
-Examples:
+Firefox and LibreWolf use a copied `cookies.sqlite` file so the browser can stay open while the script runs.
 
-```bash
-./youtube_sync.sh --dry-run --browser brave
-./youtube_sync.sh --dry-run --browser chromium
-./youtube_sync.sh --dry-run --browser chrome
-```
-
-In `youtube_sync.conf`:
+Chromium-family browsers are read directly by `yt-dlp`:
 
 ```bash
 COOKIE_BROWSER="brave"
+COOKIE_BROWSER="chromium"
+COOKIE_BROWSER="chrome"
 ```
 
-If automatic profile detection fails, set a profile directory:
+You can also override the browser from the command line:
+
+```bash
+./youtube_sync.sh --dry-run --browser brave
+```
+
+If automatic detection fails, set a profile directory:
 
 ```bash
 COOKIE_PROFILE_DIR="$HOME/.config/chromium"
@@ -208,4 +185,20 @@ COOKIE_PROFILE_DIR="$HOME/.config/google-chrome"
 COOKIE_PROFILE_DIR="$HOME/.config/BraveSoftware/Brave-Browser"
 ```
 
+For Firefox/LibreWolf, you can set a cookie database manually:
+
+```bash
+COOKIE_SQLITE="$HOME/.mozilla/firefox/xxxxxxxx.default-release/cookies.sqlite"
+```
+
 For Chromium-family browsers, `COOKIE_SQLITE` is ignored because `yt-dlp` reads browser cookies directly.
+
+To disable cookies for public playlists:
+
+```bash
+USE_BROWSER_COOKIES=0
+```
+
+## License
+
+MIT

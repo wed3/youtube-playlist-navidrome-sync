@@ -64,7 +64,7 @@ Edit:
 PLAYLIST_URL="https://www.youtube.com/playlist?list=..."
 REMOTE_USER="user"
 REMOTE_HOST="192.168.1.10"
-REMOTE_DIR="/mnt/main/media/Music"
+REMOTE_DIR="/path/to/navidrome/music"
 SSH_KEY="$HOME/.ssh/id_ed25519_ytsync"
 ```
 

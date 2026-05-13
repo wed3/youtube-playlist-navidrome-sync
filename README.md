@@ -165,15 +165,6 @@ Check logs:
 journalctl --user -u youtube-sync.service -f
 ```
 
-## Files
-
-Runtime files are ignored by Git:
-
-- `youtube_sync.conf`
-- `staging/`
-- `archive.txt`
-- `yt-dlp.log`
-
 ## License
 
 MIT

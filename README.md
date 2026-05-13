@@ -112,37 +112,6 @@ Disable browser cookies:
 ./youtube_sync.sh --no-cookies
 ```
 
-## SSH
-
-Make sure key-based SSH works before running the script:
-
-```bash
-ssh -i ~/.ssh/id_ed25519_ytsync user@192.168.1.10
-```
-
-The remote music directory must be writable by the SSH user.
-
-## Scheduling with systemd
-
-Example user service and timer files are included in `systemd/`.
-
-Install them with:
-
-```bash
-mkdir -p ~/.config/systemd/user
-cp systemd/youtube-sync.service ~/.config/systemd/user/
-cp systemd/youtube-sync.timer ~/.config/systemd/user/
-
-systemctl --user daemon-reload
-systemctl --user enable --now youtube-sync.timer
-```
-
-Check logs:
-
-```bash
-journalctl --user -u youtube-sync.service -f
-```
-
 ## Browser Cookies
 
 The script can use browser cookies through `yt-dlp` for playlists that require login or age/account verification.
@@ -197,6 +166,36 @@ To disable cookies for public playlists:
 
 ```bash
 USE_BROWSER_COOKIES=0
+```
+## SSH
+
+Make sure key-based SSH works before running the script:
+
+```bash
+ssh -i ~/.ssh/id_ed25519_ytsync user@192.168.1.10
+```
+
+The remote music directory must be writable by the SSH user.
+
+## Scheduling with systemd
+
+Example user service and timer files are included in `systemd/`.
+
+Install them with:
+
+```bash
+mkdir -p ~/.config/systemd/user
+cp systemd/youtube-sync.service ~/.config/systemd/user/
+cp systemd/youtube-sync.timer ~/.config/systemd/user/
+
+systemctl --user daemon-reload
+systemctl --user enable --now youtube-sync.timer
+```
+
+Check logs:
+
+```bash
+journalctl --user -u youtube-sync.service -f
 ```
 
 ## License

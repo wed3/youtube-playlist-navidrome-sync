@@ -1,0 +1,9 @@
+youtube_sync.conf
+staging/
+archive.txt
+yt-dlp.log
+*.log
+*.tmp
+cookies.sqlite
+.env
+.youtube_sync.lock

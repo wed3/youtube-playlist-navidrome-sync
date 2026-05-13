@@ -1,0 +1,7 @@
+[Unit]
+Description=Sync YouTube playlist audio to Navidrome
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/bot_scripts/youtube-playlist-navidrome-sync
+ExecStart=%h/bot_scripts/youtube-playlist-navidrome-sync/youtube_sync.sh

@@ -1,0 +1,60 @@
+# Copy this file to youtube_sync.conf and edit it.
+# Do not commit youtube_sync.conf if it contains personal paths, hosts, or private playlist URLs.
+
+PLAYLIST_URL="https://www.youtube.com/playlist?list=..."
+
+# Defaults to the directory containing youtube_sync.sh if omitted.
+BASE_DIR="$HOME/bot_scripts/youtube-playlist-navidrome-sync"
+
+REMOTE_USER="user"
+REMOTE_HOST="192.168.1.10"
+REMOTE_DIR="/mnt/main/media/Music"
+SSH_KEY="$HOME/.ssh/id_ed25519_ytsync"
+
+# Audio output settings.
+AUDIO_FORMAT="mp3"
+AUDIO_QUALITY="0"
+
+# yt-dlp output pattern.
+OUTPUT_TEMPLATE="%(artist,creator,uploader)s - %(title)s.%(ext)s"
+
+# Browser cookies.
+# Set USE_BROWSER_COOKIES=0 for public playlists that do not need login.
+USE_BROWSER_COOKIES=1
+COOKIES_REQUIRED=1
+
+# Usually "firefox" works for Firefox/LibreWolf cookie DBs.
+COOKIE_BROWSER="firefox"
+
+# "auto" checks common LibreWolf/Firefox cookie locations.
+# Or set this directly:
+# COOKIE_SQLITE="$HOME/.mozilla/firefox/xxxxxxxx.default-release/cookies.sqlite"
+COOKIE_SQLITE="auto"
+
+# Alternative: use a full copied/unlocked browser profile dir.
+# COOKIE_PROFILE_DIR=""
+
+SLEEP_INTERVAL=2
+MAX_SLEEP_INTERVAL=5
+
+# yt-dlp output pattern.
+OUTPUT_TEMPLATE="%(artist,creator,uploader)s - %(title)s.%(ext)s"
+
+# Browser cookies.
+# Set USE_BROWSER_COOKIES=0 for public playlists that do not need login.
+USE_BROWSER_COOKIES=1
+COOKIES_REQUIRED=1
+
+# Usually "firefox" works for Firefox/LibreWolf cookie DBs.
+COOKIE_BROWSER="firefox"
+
+# "auto" checks common LibreWolf/Firefox cookie locations.
+# Or set this directly:
+# COOKIE_SQLITE="$HOME/.mozilla/firefox/xxxxxxxx.default-release/cookies.sqlite"
+COOKIE_SQLITE="auto"
+
+# Alternative: use a full copied/unlocked browser profile dir.
+# COOKIE_PROFILE_DIR=""
+
+SLEEP_INTERVAL=2
+MAX_SLEEP_INTERVAL=5

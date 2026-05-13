@@ -169,6 +169,7 @@ journalctl --user -u youtube-sync.service -f
 
 MIT
 
+
 ## Chromium / Chrome / Brave Cookies
 
 The script can also use Chromium-family browser cookies through `yt-dlp`.
@@ -183,6 +184,28 @@ edge
 opera
 vivaldi
 whale
+```
 
+Examples:
 
+```bash
+./youtube_sync.sh --dry-run --browser brave
+./youtube_sync.sh --dry-run --browser chromium
+./youtube_sync.sh --dry-run --browser chrome
+```
 
+In `youtube_sync.conf`:
+
+```bash
+COOKIE_BROWSER="brave"
+```
+
+If automatic profile detection fails, set a profile directory:
+
+```bash
+COOKIE_PROFILE_DIR="$HOME/.config/chromium"
+COOKIE_PROFILE_DIR="$HOME/.config/google-chrome"
+COOKIE_PROFILE_DIR="$HOME/.config/BraveSoftware/Brave-Browser"
+```
+
+For Chromium-family browsers, `COOKIE_SQLITE` is ignored because `yt-dlp` reads browser cookies directly.

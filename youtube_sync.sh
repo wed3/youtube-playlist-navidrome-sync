@@ -12,6 +12,7 @@ options:
   --dry-run               show playlist entries without downloading/transferring
   --keep-local            do not delete local files after rsync
   --no-cookies            do not use browser cookies
+  --browser BROWSER       cookie browser: firefox, librewolf, chromium, chrome, brave, edge, opera, vivaldi, whale
   -h, --help              show help
 
 example:
@@ -33,6 +34,7 @@ override_playlist=""
 dry_run="${YTSYNC_DRY_RUN:-0}"
 keep_local="${YTSYNC_KEEP_LOCAL:-0}"
 no_cookies=0
+override_cookie_browser=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -57,6 +59,11 @@ while [[ $# -gt 0 ]]; do
     --no-cookies)
       no_cookies=1
       shift
+      ;;
+    --browser)
+      override_cookie_browser="${2:-}"
+      [[ -n "$override_cookie_browser" ]] || { echo "missing value for --browser" >&2; exit 2; }
+      shift 2
       ;;
     -h|--help)
       usage
@@ -100,6 +107,9 @@ output_template="${OUTPUT_TEMPLATE:-%(artist,creator,uploader)s - %(title)s.%(ex
 use_browser_cookies="${USE_BROWSER_COOKIES:-1}"
 cookies_required="${COOKIES_REQUIRED:-1}"
 cookie_browser="${COOKIE_BROWSER:-firefox}"
+if [[ -n "$override_cookie_browser" ]]; then
+  cookie_browser="$override_cookie_browser"
+fi
 cookie_sqlite="${COOKIE_SQLITE:-auto}"
 cookie_profile_dir="${COOKIE_PROFILE_DIR:-}"
 
@@ -172,6 +182,36 @@ cookie_args=()
 
 if [[ "$no_cookies" == "1" ]]; then
   use_browser_cookies=0
+fi
+
+if [[ "$use_browser_cookies" == "1" ]]; then
+  case "$cookie_browser" in
+    chromium|chrome|brave|edge|opera|vivaldi|whale)
+      if [[ -n "$cookie_profile_dir" ]]; then
+        if [[ ! -d "$cookie_profile_dir" ]]; then
+          echo "COOKIE_PROFILE_DIR does not exist: $cookie_profile_dir" >&2
+          exit 1
+        fi
+        cookie_args=(--cookies-from-browser "${cookie_browser}:$cookie_profile_dir")
+      else
+        cookie_args=(--cookies-from-browser "$cookie_browser")
+      fi
+
+      if [[ "$cookie_sqlite" != "auto" ]]; then
+        echo "warning: COOKIE_SQLITE is ignored for Chromium-family browsers; use COOKIE_PROFILE_DIR if needed" >&2
+      fi
+
+      use_browser_cookies=0
+      ;;
+    firefox|librewolf)
+      :
+      ;;
+    *)
+      echo "unsupported COOKIE_BROWSER: $cookie_browser" >&2
+      echo "supported: firefox, librewolf, chromium, chrome, brave, edge, opera, vivaldi, whale" >&2
+      exit 1
+      ;;
+  esac
 fi
 
 if [[ "$use_browser_cookies" == "1" ]]; then

@@ -168,3 +168,21 @@ journalctl --user -u youtube-sync.service -f
 ## License
 
 MIT
+
+## Chromium / Chrome / Brave Cookies
+
+The script can also use Chromium-family browser cookies through `yt-dlp`.
+
+Supported browser values:
+
+```text
+chromium
+chrome
+brave
+edge
+opera
+vivaldi
+whale
+
+
+

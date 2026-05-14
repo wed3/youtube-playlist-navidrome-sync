@@ -1,5 +1,4 @@
 # Copy this file to youtube_sync.conf and edit it.
-# Do not commit youtube_sync.conf if it contains personal paths, hosts, or private playlist URLs.
 
 PLAYLIST_URL="https://www.youtube.com/playlist?list=..."
 
